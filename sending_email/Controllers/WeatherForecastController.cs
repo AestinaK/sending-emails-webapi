@@ -35,8 +35,16 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost]
-    public async Task GetEmail(Message message)
+    public async Task GetEmail(MessageOnly message)
     {
       await _emailService.SendMessage(message);
+    }
+
+    [HttpPost]
+    public async Task SendEmailWithFile()
+    {
+        var files = Request.Form.Files.Any() ? Request.Form.Files : new FormFileCollection();
+        var sendMail = new Message("astina", "astina.prathamit@gmail.com","This is content", "This is subject",files);
+        await _emailService.SendMailWithFileAsync(sendMail);
     }
 }

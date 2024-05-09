@@ -44,7 +44,7 @@ public class WeatherForecastController : ControllerBase
     public async Task SendEmailWithFile()
     {
         var files = Request.Form.Files.Any() ? Request.Form.Files : new FormFileCollection();
-        var sendMail = new Message("astina", "astina.prathamit@gmail.com","This is content", "This is subject",files);
+        var sendMail = new Message("Email receiver name", "receiver email address","This is content", "This is subject",files);
         await _emailService.SendMailWithFileAsync(sendMail);
     }
 }
